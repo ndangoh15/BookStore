@@ -16,6 +16,7 @@ namespace NJ.BookStore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,15 +27,41 @@ namespace NJ.BookStore
                 app.UseDeveloperExceptionPage();
             }
 
+            //app.Use(async (Context, next) =>
+            //    {
+            //        await Context.Response.WriteAsync("This is my first middleware\n");
+
+            //        await next();
+
+            //        await Context.Response.WriteAsync("Response from first middleware\n");
+            //    });
+
+            //app.Use(async (Context, next) =>
+            //{
+            //    await Context.Response.WriteAsync("This is my second middleware\n");
+            //     await next();
+            //    await Context.Response.WriteAsync("Response from second middleware\n");
+            //});
+
+            //app.Use(async (Context, next) =>
+            //{
+            //    await Context.Response.WriteAsync("This is my third middleware\n");
+
+            //});
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapDefaultControllerRoute();
             });
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapGet("/joe", async context =>
+            //    {
+            //        await context.Response.WriteAsync("Hello Joe");
+            //    });
+            //});
         }
     }
 }
